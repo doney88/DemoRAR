@@ -23,7 +23,7 @@ namespace DemoRAR
 
             if (Exists())
             {
-                RARHelper.UnRAR(this.txtUnRARFolder.Text, this.txtRARFilePath.Text, this.txtRARFileName.Text);
+                RARHelper.UnRAR(txtFileFolder.Text, this.txtRARFolder.Text,txtRARName.Text);
             }
         }
         /// <summary>
@@ -40,6 +40,11 @@ namespace DemoRAR
         private void Form1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnRAR_Click(object sender, EventArgs e)
+        {
+            RARHelper.RAR(txtFileFolder.Text, txtRARFolder.Text, txtRARName.Text);
         }
     }
 
