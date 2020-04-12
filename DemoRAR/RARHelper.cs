@@ -29,11 +29,11 @@ namespace DemoRAR
             Process process;
             try
             {
-                regkey = Registry.ClassesRoot.OpenSubKey(@"Applications\WinRAR.exe\shell\open\command");
+                regkey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\WinRAR.exe");
                 regvalue = regkey.GetValue(""); // 键值为 "d:\Program Files\WinRAR\WinRAR.exe" "%1"  
                 rarexe = regvalue.ToString();
                 regkey.Close();
-                rarexe = rarexe.Substring(1, rarexe.Length - 7); // d:\Program Files\WinRAR\WinRAR.exe  
+                //rarexe = rarexe.Substring(1, rarexe.Length - 7); // d:\Program Files\WinRAR\WinRAR.exe  
                 Directory.CreateDirectory(path);
                 //压缩命令，相当于在要压缩的文件夹(path)上点右键 ->WinRAR->添加到压缩文件->输入压缩文件名(rarName)  
                 cmd = string.Format("a {0} {1} -r", rarName, path);
@@ -63,34 +63,32 @@ namespace DemoRAR
         /// 利用 WinRAR 进行解压缩  
         /// </summary>  
         /// <param name="UnRARFolder">文件解压路径（绝对）</param>  
-        /// <param name="rarPath">将要解压缩的 .rar 文件的存放目录（绝对路径）</param>
-        /// <param name="rarName">将要解压缩的 .rar 文件名（包括后缀）</param>
+        /// <param name="rarFilePath">将要解压缩的 .rar 文件的存放目录（绝对路径）</param>
         /// <returns>true 或 false。解压缩成功返回 true，反之，false。</returns>
-        public static bool UnRAR(string UnRARFolder, string rarPath, string rarName)
+        public static bool UnRAR(string UnRARFolder, string rarFilePath)
         {
             bool flag = false;
-            string rarexe;
-            RegistryKey regkey;
-            Object regvalue;
-            string cmd;
+            string rarexePath;
+            RegistryKey regKey;
+            Object regValue;
+            string rarCmd;
             ProcessStartInfo startinfo;
             Process process;
             try
             {
-                regkey = Registry.ClassesRoot.OpenSubKey(@"Applications\WinRAR.exe\shell\open\command");
-                regvalue = regkey.GetValue("");
-                rarexe = regvalue.ToString();
-                regkey.Close();
-                rarexe = rarexe.Substring(1, rarexe.Length - 7);
+                regKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\WinRAR.exe");
+                regValue = regKey.GetValue("");
+                rarexePath = regValue.ToString();
+                regKey.Close();
                 Directory.CreateDirectory(UnRARFolder);
-                //解压缩命令，相当于在要压缩文件(rarName)上点右键 ->WinRAR->解压到当前文件夹  
-                cmd = string.Format("x {0} {1} -y", rarName, UnRARFolder);
+                //解压缩命令，相当于在要压缩文件(rarName)上点右键 ->WinRAR->解压到当前文件夹  -y表示如果存在相同文件则覆盖
+                rarCmd = string.Format("x {0} {1} -y", rarFilePath , UnRARFolder);
                 startinfo = new ProcessStartInfo();
-                if (!File.Exists(rarexe)) rarexe = Application.StartupPath + "\\res\\WinRAR.exe";
-                startinfo.FileName = rarexe;
-                startinfo.Arguments = cmd;
+                if (!File.Exists(rarexePath)) rarexePath = Application.StartupPath + "\\res\\WinRAR.exe";
+                startinfo.FileName = rarexePath;
+                startinfo.Arguments = rarCmd;
                 startinfo.WindowStyle = ProcessWindowStyle.Hidden;
-                startinfo.WorkingDirectory = rarPath;
+                startinfo.WorkingDirectory = rarFilePath;
                 process = new Process();
                 process.StartInfo = startinfo;
                 process.Start();
@@ -117,11 +115,10 @@ namespace DemoRAR
             Process process;
             try
             {
-                regkey = Registry.ClassesRoot.OpenSubKey(@"Applications\WinRAR.exe\shell\open\command");
+                regkey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\WinRAR.exe");
                 regvalue = regkey.GetValue("");
                 rarexe = regvalue.ToString();
                 regkey.Close();
-                rarexe = rarexe.Substring(1, rarexe.Length - 7);
             }
             catch
             {

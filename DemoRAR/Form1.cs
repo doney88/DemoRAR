@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,7 +20,26 @@ namespace DemoRAR
 
         private void btnUnRAR_Click(object sender, EventArgs e)
         {
-            RARHelper.UnRAR(this.txtUnRARFolder.Text, this.txtRARFilePath.Text, this.txtRARFileName.Text);
+
+            if (Exists())
+            {
+                RARHelper.UnRAR(this.txtUnRARFolder.Text, this.txtRARFilePath.Text, this.txtRARFileName.Text);
+            }
+        }
+        /// <summary>
+        /// 是否安装了Winrar
+        /// </summary>
+        /// <returns></returns>
+        static public bool Exists()
+        {
+            RegistryKey the_Reg = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\WinRAR.exe");//访问储存应用程序注册表信息键值
+            string winRarPath = the_Reg.GetValue("").ToString();//查询WINRAR注册表储存路径
+            return !string.IsNullOrEmpty(winRarPath);//如果存在则表示应用程序存在于本计算机中
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 

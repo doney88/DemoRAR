@@ -39,41 +39,46 @@
             // 
             // txtRARFilePath
             // 
-            this.txtRARFilePath.Location = new System.Drawing.Point(147, 79);
+            this.txtRARFilePath.Location = new System.Drawing.Point(294, 158);
+            this.txtRARFilePath.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.txtRARFilePath.Name = "txtRARFilePath";
-            this.txtRARFilePath.Size = new System.Drawing.Size(369, 21);
+            this.txtRARFilePath.Size = new System.Drawing.Size(734, 35);
             this.txtRARFilePath.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(76, 82);
+            this.label1.Location = new System.Drawing.Point(152, 164);
+            this.label1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(65, 12);
+            this.label1.Size = new System.Drawing.Size(130, 24);
             this.label1.TabIndex = 1;
             this.label1.Text = "压缩包路径";
             // 
             // txtUnRARFolder
             // 
-            this.txtUnRARFolder.Location = new System.Drawing.Point(147, 108);
+            this.txtUnRARFolder.Location = new System.Drawing.Point(294, 216);
+            this.txtUnRARFolder.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.txtUnRARFolder.Name = "txtUnRARFolder";
-            this.txtUnRARFolder.Size = new System.Drawing.Size(369, 21);
+            this.txtUnRARFolder.Size = new System.Drawing.Size(734, 35);
             this.txtUnRARFolder.TabIndex = 0;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(40, 111);
+            this.label2.Location = new System.Drawing.Point(80, 222);
+            this.label2.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(101, 12);
+            this.label2.Size = new System.Drawing.Size(202, 24);
             this.label2.TabIndex = 1;
             this.label2.Text = "解压缩文件夹路径";
             // 
             // btnUnRAR
             // 
-            this.btnUnRAR.Location = new System.Drawing.Point(73, 177);
+            this.btnUnRAR.Location = new System.Drawing.Point(146, 354);
+            this.btnUnRAR.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnUnRAR.Name = "btnUnRAR";
-            this.btnUnRAR.Size = new System.Drawing.Size(75, 23);
+            this.btnUnRAR.Size = new System.Drawing.Size(150, 46);
             this.btnUnRAR.TabIndex = 2;
             this.btnUnRAR.Text = "解压缩";
             this.btnUnRAR.UseVisualStyleBackColor = true;
@@ -81,25 +86,27 @@
             // 
             // txtRARFileName
             // 
-            this.txtRARFileName.Location = new System.Drawing.Point(147, 135);
+            this.txtRARFileName.Location = new System.Drawing.Point(294, 270);
+            this.txtRARFileName.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.txtRARFileName.Name = "txtRARFileName";
-            this.txtRARFileName.Size = new System.Drawing.Size(369, 21);
+            this.txtRARFileName.Size = new System.Drawing.Size(734, 35);
             this.txtRARFileName.TabIndex = 3;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(88, 138);
+            this.label3.Location = new System.Drawing.Point(176, 276);
+            this.label3.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(53, 12);
+            this.label3.Size = new System.Drawing.Size(106, 24);
             this.label3.TabIndex = 1;
             this.label3.Text = "解压包名";
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1600, 900);
             this.Controls.Add(this.txtRARFileName);
             this.Controls.Add(this.btnUnRAR);
             this.Controls.Add(this.label3);
@@ -107,8 +114,10 @@
             this.Controls.Add(this.txtUnRARFolder);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtRARFilePath);
+            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
