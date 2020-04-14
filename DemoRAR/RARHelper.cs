@@ -47,27 +47,20 @@ namespace DemoRAR
             process.StartInfo = startinfo;
             return process;
         }
-
-        #endregion
-
         /// <summary>
-        /// 压缩文件
+        /// 传入RAR命令符，执行rar命令
         /// </summary>
-        /// <param name="sourceFolder">压缩文件的文件夹目录</param>
-        /// <param name="rarFolder">压缩文件目录</param>
-        /// <param name="rarName">压缩文件名</param>
+        /// <param name="rarFolder">压缩包路径</param>
+        /// <param name="rarCmd">RAR命令符</param>
         /// <returns></returns>
-        public bool RAR(string sourceFolder, string rarFolder, string rarName)
+        private bool ExecuteRAR(string rarFolder,string rarCmd)
         {
-            string rarCmd;     //WinRAR 命令参数  
-            bool flag = false ;
+            bool flag = false;
             Process process;
             try
             {
                 string exePath = GetExePath();
                 Directory.CreateDirectory(rarFolder);
-                //压缩命令，相当于在要压缩的文件夹(path)上点右键 ->WinRAR->添加到压缩文件->输入压缩文件名(rarName)  
-                rarCmd = string.Format("a {0} {1} -r -ep1", rarName, sourceFolder); //a 表示压缩 -r 表示囊括子文件夹 -ep1表示不要囊括父文件夹
                 process = CreateRARProcess(rarFolder, rarCmd, exePath);
                 process.Start();
                 process.WaitForExit(); //无限期等待进程 winrar.exe 退出  
@@ -83,6 +76,21 @@ namespace DemoRAR
             }
             return flag;
         }
+        #endregion
+
+        /// <summary>
+        /// 压缩文件
+        /// </summary>
+        /// <param name="sourceFolder">压缩文件的文件夹目录</param>
+        /// <param name="rarFolder">压缩文件目录</param>
+        /// <param name="rarName">压缩文件名</param>
+        /// <returns></returns>
+        public bool RAR(string sourceFolder, string rarFolder, string rarName)
+        {
+            //压缩命令，相当于在要压缩的文件夹(path)上点右键 ->WinRAR->添加到压缩文件->输入压缩文件名(rarName)  
+            string rarCmd = string.Format("a {0} {1} -r -ep1", rarName, sourceFolder); //a 表示压缩 -r 表示囊括子文件夹 -ep1表示不要囊括父文件夹
+            return ExecuteRAR( rarFolder, rarCmd);
+        }
         /// <summary>
         /// 解压缩
         /// </summary>
@@ -92,29 +100,9 @@ namespace DemoRAR
         /// <returns></returns>
         public bool UnRAR(string fileFolder, string rarFolder,string rarName)
         {
-            bool flag = false;
-            string rarCmd;
-            Process process;
-            try
-            {
-                string exePath = GetExePath();
-                Directory.CreateDirectory(fileFolder);
-                //解压缩命令，相当于在要压缩文件(rarName)上点右键 ->WinRAR->解压到当前文件夹  -y表示如果存在相同文件则覆盖
-                rarCmd = string.Format("x {0} {1} -y", rarFolder + "\\" + rarName, fileFolder);
-                process = CreateRARProcess(rarFolder, rarCmd, exePath);
-                process.Start();
-                process.WaitForExit();
-                if (process.HasExited)
-                {
-                    flag = true;
-                }
-                process.Close();
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-            return flag;
+            //解压缩命令，相当于在要压缩文件(rarName)上点右键 ->WinRAR->解压到当前文件夹  -y表示如果存在相同文件则覆盖
+            string rarCmd = string.Format("x {0} {1} -y", rarFolder + "\\" + rarName, fileFolder);
+            return ExecuteRAR(rarFolder, rarCmd);
         }
         /// <summary>
         /// 异步解压缩
