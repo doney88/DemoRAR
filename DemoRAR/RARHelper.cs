@@ -110,11 +110,11 @@ namespace DemoRAR
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="path"></param>
-        /// <param name="rarPath"></param>
+        /// <param name="fileFolder"></param>
+        /// <param name="rarFolder"></param>
         /// <param name="rarName"></param>
         /// <returns></returns>
-        public static Process UnRARAsync(string path, string rarPath, string rarName)
+        public static Process UnRARAsync(string fileFolder, string rarFolder, string rarName)
         {
             string rarexe;
             RegistryKey regkey;
@@ -134,15 +134,15 @@ namespace DemoRAR
                 //throw e;
                 rarexe = Application.StartupPath + "\\WinRAR.exe";
             }
-            Directory.CreateDirectory(path);
+            Directory.CreateDirectory(fileFolder);
             //解压缩命令，相当于在要压缩文件(rarName)上点右键 ->WinRAR->解压到当前文件夹  
-            cmd = string.Format(" x {0} {1} -y", rarName, '"' + path + '"');
+            cmd = string.Format(" x {0} {1} -y", rarFolder + "\\" + rarName, fileFolder );
             startinfo = new ProcessStartInfo();
             if (!File.Exists(rarexe)) rarexe = Application.StartupPath + "\\res\\WinRAR.exe";
             startinfo.FileName = rarexe;
             startinfo.Arguments = cmd;
             startinfo.WindowStyle = ProcessWindowStyle.Hidden;
-            startinfo.WorkingDirectory = rarPath;
+            startinfo.WorkingDirectory = rarFolder;
             startinfo.UseShellExecute = true;
             process = new Process();
             process.StartInfo = startinfo;

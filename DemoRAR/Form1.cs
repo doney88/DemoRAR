@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -45,6 +46,11 @@ namespace DemoRAR
         private void btnRAR_Click(object sender, EventArgs e)
         {
             RARHelper.RAR(txtFileFolder.Text, txtRARFolder.Text, txtRARName.Text);
+        }
+        private void btnUnRARAsync_Click(object sender, EventArgs e)
+        {
+            Process p = RARHelper.UnRARAsync(txtFileFolder.Text, this.txtRARFolder.Text, txtRARName.Text);
+
         }
     }
 
