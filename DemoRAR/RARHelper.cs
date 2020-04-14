@@ -61,12 +61,14 @@ namespace DemoRAR
             }
             return flag;
         }
-        /// <summary>  
-        /// 利用 WinRAR 进行解压缩  
-        /// </summary>  
-        /// <param name="fileFolder">文件解压路径（绝对）</param>  
-        /// <param name="rarFolder">将要解压缩的 .rar 文件的存放目录（绝对路径）</param>
-        /// <returns>true 或 false。解压缩成功返回 true，反之，false。</returns>
+
+        /// <summary>
+        /// 解压缩
+        /// </summary>
+        /// <param name="fileFolder">解压后文件存放路径</param>
+        /// <param name="rarFolder">RAR压缩包存放路径</param>
+        /// <param name="rarName">RAR压缩包名字</param>
+        /// <returns></returns>
         public static bool UnRAR(string fileFolder, string rarFolder,string rarName)
         {
             bool flag = false;
@@ -108,11 +110,11 @@ namespace DemoRAR
             return flag;
         }
         /// <summary>
-        /// 
+        /// 异步解压缩
         /// </summary>
-        /// <param name="fileFolder"></param>
-        /// <param name="rarFolder"></param>
-        /// <param name="rarName"></param>
+        /// <param name="fileFolder">解压后文件存放路径</param>
+        /// <param name="rarFolder">RAR压缩包存放路径</param>
+        /// <param name="rarName">RAR压缩包名字</param>
         /// <returns></returns>
         public static Process UnRARAsync(string fileFolder, string rarFolder, string rarName)
         {
